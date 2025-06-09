@@ -1,14 +1,25 @@
 import { FC } from 'react';
+import { useSelector, UseSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
-
+import { RootState } from 'src/services/store';
+import { getIngredientsWirhSelector } from 'src/slices/IngredientsSlice';
+import styles from '../app/app.module.css'
+ 
 export const IngredientDetails: FC = () => {
-  /** TODO: взять переменную из стора */
-  const ingredientData = null;
+
+  const ingredients = useSelector(getIngredientsWirhSelector)
+  const {id} = useParams()
+  const ingredientData = ingredients.find((item) => item._id === id)
 
   if (!ingredientData) {
     return <Preloader />;
   }
 
-  return <IngredientDetailsUI ingredientData={ingredientData} />;
+  return (
+    <div className={styles.detailPageWrap}>
+      <IngredientDetailsUI ingredientData={ingredientData} />
+    </div>
+  );
 };
