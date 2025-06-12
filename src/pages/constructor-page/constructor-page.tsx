@@ -5,7 +5,7 @@ import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
 import { RootState } from '../../services/store';
-import { getStatusLoading } from 'src/slices/IngredientsSlice';
+import { getStatusLoading } from '../../slices/IngredientsSlice';
 
 
 export const ConstructorPage: FC = () => {

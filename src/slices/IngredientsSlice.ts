@@ -42,14 +42,11 @@ const ingredientsSlice = createSlice({
   },
   selectors: {
     getIngredientsWirhSelector: (state) => state.ingredients,
-    getStatusLoading: (state) => state.loading,
-    getIngredientsState: (state) => state
+    getStatusLoading: (state) => state.loading
   }
 });
 
-export default ingredientsSlice.reducer;
-export const {
-  getIngredientsWirhSelector,
-  getStatusLoading,
-  getIngredientsState
-} = ingredientsSlice.selectors;
+
+export const { getIngredientsWirhSelector, getStatusLoading } = ingredientsSlice.selectors;
+
+export default ingredientsSlice;

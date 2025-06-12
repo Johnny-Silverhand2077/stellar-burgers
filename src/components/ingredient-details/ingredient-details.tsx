@@ -3,14 +3,15 @@ import { useSelector, UseSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
-import { RootState } from 'src/services/store';
-import { getIngredientsWirhSelector } from 'src/slices/IngredientsSlice';
+import { RootState } from '../../services/store';
+import { getIngredientsWirhSelector } from '../../slices/IngredientsSlice';
 import styles from '../app/app.module.css'
  
 export const IngredientDetails: FC = () => {
-
   const ingredients = useSelector(getIngredientsWirhSelector)
+
   const {id} = useParams()
+
   const ingredientData = ingredients.find((item) => item._id === id)
 
   if (!ingredientData) {

@@ -1,12 +1,14 @@
 import { ProfileUI } from '@ui-pages';
+import { useDispatch } from 'react-redux';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { TUser } from '@utils-types';
+import { useSelector} from '../../services/store'
+import { selectUser , updateUser} from '../../slices/UserInfoSlice'
+
 
 export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
-  const user = {
-    name: '',
-    email: ''
-  };
+  const user = useSelector(selectUser) as TUser
+  const dispath = useDispatch()
 
   const [formValue, setFormValue] = useState({
     name: user.name,
@@ -20,7 +22,7 @@ export const Profile: FC = () => {
       name: user?.name || '',
       email: user?.email || ''
     }));
-  }, [user]);
+  }, []);
 
   const isFormChanged =
     formValue.name !== user?.name ||

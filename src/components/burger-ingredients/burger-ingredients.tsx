@@ -1,18 +1,15 @@
 import { useState, useRef, useEffect, FC } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { UseDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
-import { RootState } from 'src/services/store';
-import { AppDispatch } from 'src/services/store';
 import { Preloader } from '@ui';
-import { getIngredientsWirhSelector, getStatusLoading } from 'src/slices/IngredientsSlice';
+import { getIngredientsWirhSelector, getStatusLoading } from '../../slices/IngredientsSlice';
 
 
 export const BurgerIngredients: FC = () => {
-
   const ingredients = useSelector(getIngredientsWirhSelector);
+
   const loading = useSelector(getStatusLoading)
 
   if(loading) {
