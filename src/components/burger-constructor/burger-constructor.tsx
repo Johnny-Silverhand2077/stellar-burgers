@@ -2,15 +2,13 @@ import { FC, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
 import { TConstructorIngredient } from '@utils-types';
-import { BurgerConstructorUI } from '@ui';
+import { Preloader, BurgerConstructorUI} from '@ui';
 import { getConstructorItems, getOrderModalData, getOrderRequst, createOrder, clearOrder } from '../../slices/BurgerConstructoSlice';
 import { selectUser, selectIsAuthChecked, selectIsAuth, checkUserAuth} from '../../slices/UserInfoSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch()
-
   const navigate = useNavigate()
-
   const constructorItems = useSelector(getConstructorItems);
   const orderRequest = useSelector(getOrderRequst)
   const orderModalData = useSelector(getOrderModalData)

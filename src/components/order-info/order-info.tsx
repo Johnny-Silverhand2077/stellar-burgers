@@ -1,22 +1,26 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient, TOrder } from '@utils-types';
-import { useSelector } from '../../services/store';
-import { getFeedOrders } from 'src/slices/FeedDataSlice';
-import { getIngredientsWirhSelector } from 'src/slices/IngredientsSlice';
+import { useSelector, useDispatch } from '../../services/store';
+import { getFeedOrders, getOrderByNumber } from '../../slices/FeedDataSlice';
+import { getIngredientsWirhSelector } from '../../slices/IngredientsSlice';
+import { selectOrderId } from '../../services/selector';
 
 export const OrderInfo: FC = () => {
-  const param = useParams();
+  const {number} = useParams();
   const orders = useSelector(getFeedOrders);
   const ingredients: TIngredient[] = useSelector(getIngredientsWirhSelector);
+  const orderData = useSelector(selectOrderId(Number(number)))
+  const dispatch = useDispatch()
 
-  const orderData: TOrder | undefined = orders.find(
-    (item) => item.number === Number(param.number)
-  );
+  useEffect(() => {
+    if(!orderData) {
+      dispatch(getOrderByNumber(Number(number)))
+    }
+  }, [dispatch])
 
-  /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return;
 

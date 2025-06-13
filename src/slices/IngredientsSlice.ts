@@ -5,7 +5,7 @@ import { getIngredientsApi } from '@api';
 type TStateIngredient = {
   ingredients: Array<TIngredient>;
   loading: boolean;
-  error: null | undefined | string;
+  error: null | string | undefined ;
 };
 
 const initialState: TStateIngredient = {

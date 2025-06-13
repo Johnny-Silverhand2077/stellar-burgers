@@ -1,3 +1,4 @@
+import React from "react"
 import { Navigate, useLocation } from "react-router-dom"
 import { Preloader } from "@ui"
 import { useSelector } from "../../services/store"
@@ -26,4 +27,5 @@ export const ProtectedRoute = ({children, onlyUnAuth}: ProtectedRouteProps) => {
         const from = location.state?.from || {pathname: '/'}
         return <Navigate replace to={from} />
     }
+    return children
 }

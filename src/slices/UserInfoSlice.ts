@@ -13,7 +13,7 @@ import {
   refreshToken,
   fetchWithRefresh
 } from '@api';
-import { error } from 'console';
+
 
 
 type TUserState = {
@@ -35,8 +35,8 @@ const initialState: TUserState = {
 
 export const registerUser = createAsyncThunk(
     'user/register', 
-    async ({name, email, password}: TRegisterData) => {
-        const data = await registerUserApi({name, email, password})
+    async ({email, password, name }: TRegisterData) => {
+        const data = await registerUserApi({ email, password, name })
         setCookie('accessToken', data.accessToken)
         localStorage.setItem('refrecjToken', data.refreshToken)
         return data.user
@@ -61,8 +61,8 @@ export const logoutUser = createAsyncThunk(
             await logoutApi();
             deleteCookie('accessToken')
             localStorage.clear()
-        } catch {
-            return rejectWithValue(error)
+        } catch (err){
+            return rejectWithValue(err)
         }
     }
 )
@@ -95,30 +95,37 @@ export const userStateSlice = createSlice({
         builder
         .addCase(registerUser.pending, (state) =>{
             state.isAuth = false
+            state.loginUserRequst = true
             state.user = null;
         })
         .addCase(registerUser.fulfilled, (state, action) =>{
             state.isAuth = true
+            state.loginUserRequst = false
             state.user = action.payload;
         })
         .addCase(registerUser.rejected, (state, action) =>{
             state.isAuth = false
+            state.loginUserRequst = false
             state.loginUserError = action.error.message || 'Не удалось найти зарегистрированного пользователя';
         })
         .addCase(userApi.pending, (state) => {
             state.isAuth = false
+            state.loginUserRequst =true
             state.loginUserError = null
             state.user = null
+            
         })
         .addCase(userApi.fulfilled, (state, action) => {
             state.isAuth = true
             state.isAuthChecked = true
+            state.loginUserRequst = false
             state.user = action.payload.user
         })
         .addCase(userApi.rejected, (state, action) => {
             state.isAuth = false
             state.isAuthChecked = false
             state.loginUserError = action.error.message || 'Не удалось получить пользовательские данные'
+            state.loginUserRequst = false
             state.user = null
         })
         .addCase(loginUser.pending, (state) => {
@@ -156,12 +163,15 @@ export const userStateSlice = createSlice({
         })
         .addCase(updateUser.pending, (state) => {
             state.isAuth = true
+            state.loginUserRequst = true
         })
         .addCase(updateUser.fulfilled, (state, action) => {
             state.isAuth = true
+            state.loginUserRequst = false
             state.user = action.payload.user
         })
         .addCase(updateUser.rejected, (state, action) => {
+            state.loginUserRequst = false
             state.loginUserError = action.error.message || 'Не удалось получить обновление пользователя'
         })
     },

@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { useSelector, UseSelector } from 'react-redux';
+import { useSelector} from '../../services/store';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
-import { RootState } from '../../services/store';
 import { getIngredientsWirhSelector } from '../../slices/IngredientsSlice';
 import styles from '../app/app.module.css'
  

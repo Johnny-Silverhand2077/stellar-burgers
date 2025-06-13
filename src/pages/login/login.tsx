@@ -20,7 +20,7 @@ export const Login: FC = () => {
     e.preventDefault();
     const userLogin: TLoginData = {
       email: email,
-     password: password,
+      password: password,
     }
     dispatch(loginUser(userLogin))
   };
