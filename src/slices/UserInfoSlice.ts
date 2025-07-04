@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getCookie, setCookie, deleteCookie } from '../utils/cookie';
 import { TUser } from '@utils-types';
-import { TRegisterData } from '@api';
+import { TRegisterData } from '../utils/burger-api';
 import {
   registerUserApi,
   loginUserApi,
@@ -12,7 +12,7 @@ import {
   resetPasswordApi,
   refreshToken,
   fetchWithRefresh
-} from '@api';
+} from '../utils/burger-api';
 
 
 

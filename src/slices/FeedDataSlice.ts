@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { TOrder } from "@utils-types";
-import { getFeedsApi } from "@api";
-import { getOrderByNumberApi } from "@api";
+import { getFeedsApi } from "../utils/burger-api";
+import { getOrderByNumberApi } from "../utils/burger-api";
 
 
 
-type TFeedState = {
+export type TFeedState = {
     orders: TOrder[];
     orderModal: TOrder | null
     loading: boolean;
