@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { TOrder } from "@utils-types";
-import { getOrdersApi } from "@api";
+import { getOrdersApi } from "../utils/burger-api";
 
-type TOrtdersHistoryState = {
+export type TOrtdersHistoryState = {
     orders: TOrder[];
     loading: boolean;
     error: null | undefined | string;
