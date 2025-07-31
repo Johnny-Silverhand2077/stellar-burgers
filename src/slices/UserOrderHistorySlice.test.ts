@@ -22,8 +22,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Краторный люминесцентный бургер',
-      createdAt: '2024-09-02T13:46:25.234Z',
-      updatedAt: '2024-09-02T13:46:25.914Z',
+      createdAt: "2025-01-01T00:00:00.000Z",
+      updatedAt: "2025-01-01T00:00:00.000Z",
       number: 1
     },
     {
@@ -38,8 +38,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Антарианский краторный бессмертный минеральный экзо-плантаго био-марсианский бургер',
-      createdAt: '2024-09-02T07:36:55.648Z',
-      updatedAt: '2024-09-02T07:36:56.126Z',
+      createdAt: "2025-01-01T00:00:00.000Z",
+      updatedAt: "2025-01-01T00:00:00.000Z",
       number: 2
     },
     {
@@ -51,8 +51,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Краторный space бургер',
-      createdAt: '2024-09-02T07:34:44.831Z',
-      updatedAt: '2024-09-02T07:34:45.280Z',
+      createdAt: "2025-01-01T00:00:00.000Z",
+      updatedAt: "2025-01-01T00:00:00.000Z",
       number: 3
     }
   ],
@@ -61,7 +61,7 @@ const ordersTest = {
 }
 
 describe('Тесты UserOrderHistorySlice', () => {
-    it('Тест на установку флага загрузки в true и сброс ошибки при статусе pending', () => {
+    it('Тест загрузки в true и сброс ошибки при статусе pending', () => {
         const actualState = userOrderHistorySlice.reducer(
             {
                 ...initialState,
@@ -77,7 +77,7 @@ describe('Тесты UserOrderHistorySlice', () => {
         })
     })
 
-    it('Тест на установку флага загрузки в false и обновлкник данных при успешнои выполнении', () => {
+    it('Тест загрузки в false и обновлкник данных при успешнои выполнении', () => {
          const actualState = userOrderHistorySlice.reducer(
             {
                 ...initialState,
@@ -93,7 +93,7 @@ describe('Тесты UserOrderHistorySlice', () => {
         })
     })
 
-    it('Тест на установку сообщения об ошибки и сброс флага загрузки при неудаче', () => {
+    it('Тест сообщения об ошибки и сброс флага загрузки при неудаче', () => {
          const errorTest = new Error('Ошибка теста')
          const actualState = userOrderHistorySlice.reducer(
             {

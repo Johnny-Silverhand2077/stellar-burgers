@@ -9,3 +9,4 @@ describe('Тест rootReducer', () => {
         expect(initialState).toEqual(store.getState())
     })
 })
+

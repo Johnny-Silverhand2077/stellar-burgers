@@ -9,22 +9,22 @@ const initialState: TStateIngredient = {
 
 const ingredientTest = [
     {
-    _id: '1',
-    name: 'Краторная булка N-200i',
-    type: 'bun',
-    proteins: 80,
-    fat: 24,
-    carbohydrates: 53,
-    calories: 420,
-    price: 1255,
-    image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-    image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-    image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png'
+      _id: "60d3b41abdacab0026a733c6",
+      name: "Краторная булка N-200i",
+      type: "bun",
+      proteins: 80,
+      fat: 24,
+      carbohydrates: 53,
+      calories: 420,
+      price: 1255,
+      image: "https://code.s3.yandex.net/react/code/bun-02.png",
+      image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+      image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
   }
 ]
 
 describe('Тесты ingredientsSlice', () => {
-    it('Тест установки загрузку на значение true и err на значение null во время состояния ожидания', () => {
+    it('Тест загрузки на значение true и err на значение null во время ожидания', () => {
         const actualState= ingredientsSlice.reducer(
             {   ...initialState,
                 error: 'Ошибка теста'
@@ -39,7 +39,7 @@ describe('Тесты ingredientsSlice', () => {
         })
     })
 
-    it('Тест установки загрузки на значение false и обновить ингредиенты', () => {
+    it('Тест загрузки на значение false и обновить ингредиенты', () => {
         const actualState= ingredientsSlice.reducer(
             {   ...initialState,
                 loading: true
@@ -54,7 +54,7 @@ describe('Тесты ingredientsSlice', () => {
         })
     })
 
-    it('Тест установки загрузки на значение false и сообщение об ошибке error', () => {
+    it('Тест загрузки на значение false и сообщение об ошибке error', () => {
         const errorTest = new Error('Ошибка теста')
 
         const actualState= ingredientsSlice.reducer(

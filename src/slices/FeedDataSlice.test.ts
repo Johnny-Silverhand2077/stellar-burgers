@@ -27,8 +27,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Краторный люминесцентный бургер',
-      createdAt: '2024-09-02T13:46:25.234Z',
-      updatedAt: '2024-09-02T13:46:25.914Z',
+      createdAt: "2025-01-01T00:00:00.000Z",
+      updatedAt: "2025-01-01T00:00:00.000Z",
       number: 1
     },
     {
@@ -43,8 +43,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Антарианский краторный бессмертный минеральный экзо-плантаго био-марсианский бургер',
-      createdAt: '2024-09-02T07:36:55.648Z',
-      updatedAt: '2024-09-02T07:36:56.126Z',
+      createdAt: "2025-01-01T00:00:00.000Z",
+      updatedAt: '2025-01-01T00:00:00.000Z',
       number: 2
     },
     {
@@ -56,8 +56,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Краторный space бургер',
-      createdAt: '2024-09-02T07:34:44.831Z',
-      updatedAt: '2024-09-02T07:34:45.280Z',
+      createdAt: "2025-01-01T00:00:00.000Z",
+      updatedAt: "2025-01-01T00:00:00.000Z",
       number: 3
     }
   ],
@@ -66,7 +66,7 @@ const ordersTest = {
 };
 
 describe('Тесты FeedDataSlice', () => {
-  it('Тест на установку loading в true и сброс error при состоянии pending', () => {
+  it('Тест loading в true и сброс error при состоянии pending', () => {
     const actualState = feedDataSlice.reducer(
       {
         ...initialState,
@@ -85,7 +85,26 @@ describe('Тесты FeedDataSlice', () => {
     });
   });
 
-  it('Tест на установку данных после успешной загрузки', () => {
+  it('Тест loading в true при запросе заказа по номеру', () => {
+    const actualState = feedDataSlice.reducer(
+      {
+        ...initialState,
+        error: 'Ошибка теста'
+      },
+      getOrderByNumber.pending('1', 1)
+    );
+
+    expect(actualState).toEqual({
+      orders: [],
+      orderModal: null,
+      loading: true,
+      total: 0,
+      totalToday: 0,
+      error: 'Ошибка теста',
+    });
+  });
+
+  it('Tест данных после успешной загрузки', () => {
     const actualState = feedDataSlice.reducer(
       {
         ...initialState,
@@ -104,7 +123,27 @@ describe('Тесты FeedDataSlice', () => {
     });
   });
 
-  it('Тест на установку error при отклонении загрузки данных', () => {
+
+  it('Тест заказов orderModal и завершение загрузки', () => {
+    const actualState = feedDataSlice.reducer(
+      {
+        ...initialState,
+        loading: true
+      },
+      getOrderByNumber.fulfilled(ordersTest, '1', 1)
+    );
+
+    expect(actualState).toEqual({
+      orders: [],
+      orderModal: ordersTest.orders[0],
+      loading: false,
+      total: 0,
+      totalToday: 0,
+      error: null
+    });
+  });
+
+  it('Тест error при отклонении загрузки данных', () => {
     const errorTest = new Error('Ошибка теста');
     const actualState = feedDataSlice.reducer(
       {
@@ -124,45 +163,7 @@ describe('Тесты FeedDataSlice', () => {
     });
   });
 
-  it('Тест на установку loading в true при запросе заказа по номеру', () => {
-    const actualState = feedDataSlice.reducer(
-      {
-        ...initialState,
-        error: 'Ошибка теста'
-      },
-      getOrderByNumber.pending('1', 1)
-    );
-
-    expect(actualState).toEqual({
-      orders: [],
-      orderModal: null,
-      loading: true,
-      total: 0,
-      totalToday: 0,
-      error: 'Ошибка теста',
-    });
-  });
-
-  it('Тест на установку заказав orderModal и завершение загрузки', () => {
-    const actualState = feedDataSlice.reducer(
-      {
-        ...initialState,
-        loading: true
-      },
-      getOrderByNumber.fulfilled(ordersTest, '1', 1)
-    );
-
-    expect(actualState).toEqual({
-      orders: [],
-      orderModal: ordersTest.orders[0],
-      loading: false,
-      total: 0,
-      totalToday: 0,
-      error: null
-    });
-  });
-
-  it('Тест на установку ошибки и завершение загрузки при отказе в получении заказа', () => {
+  it('Тест ошибки и завершение загрузки при отказе в получении заказа', () => {
     const errorTest = new Error('Ошибка теста');
     const actualState = feedDataSlice.reducer(
       {
