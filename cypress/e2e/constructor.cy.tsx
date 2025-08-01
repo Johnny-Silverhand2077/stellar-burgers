@@ -1,8 +1,9 @@
 ///<reference types="cypress"/>
 
 const bun = '[data-cy=bun_ingredients]'
-const bunConstructor = '[data-cy=bun_1_constructor]'
-const bunConstructor2 = '[data-cy=bun_2_constructor]'
+const bunTopConstructor = '[data-cy=bun_top_constructor]'
+const bunBottomConstructor = '[data-cy=bun_bottom_constructor]'
+const chooseBuns = '[data-cy=choose_buns]'
 const main = '[data-cy=main_ingredients]'
 const souce = '[data-cy=souce_ingredients]'
 const ingredientConstructor = '[data-cy=ingredient_constructor]'
@@ -20,11 +21,15 @@ describe('Тесты конструктора страници', function() {
         cy.viewport(1280, 720)
     })
     it('Тесты добавление булки в конструктор', function() {
+        cy.get(chooseBuns).should('not.contain', 'Флюоресцентная булка R2-D3');
         cy.get(bun).contains('Добавить').click()
-        cy.get(bunConstructor).contains('Флюоресцентная булка R2-D3').should('exist')
-        cy.get(bunConstructor2).contains('Флюоресцентная булка R2-D3').should('exist')
+        cy.get(bunTopConstructor).contains('Флюоресцентная булка R2-D3').should('exist')
+        cy.get(bunBottomConstructor).contains('Флюоресцентная булка R2-D3').should('exist')
     })
     it('Тесты добавление ингридиентов в конструктор', function() {
+        cy.get(ingredientConstructor).should('not.contain', 'Мясо бессмертных моллюсков Protostomia');
+        cy.get(ingredientConstructor).should('not.contain', 'Соус Spicy-X');
+
         cy.get(main).contains('Добавить').click()
         cy.get(ingredientConstructor).contains('Мясо бессмертных моллюсков Protostomia').should('exist')
         cy.get(souce).contains('Добавить').click()
@@ -78,6 +83,10 @@ describe('Тест заказа', function () {
     cy.clearLocalStorage();
   });
   it('Тесты добалвение ингредиентов и создания заказа', function () {
+    cy.get(chooseBuns).should('not.contain', 'Флюоресцентная булка R2-D3');
+    cy.get(ingredientConstructor).should('not.contain', 'Мясо бессмертных моллюсков Protostomia');
+    cy.get(ingredientConstructor).should('not.contain', 'Соус Spicy-X');
+
     cy.get(bun).contains('Добавить').click();
     cy.get(main).contains('Добавить').click();
     cy.get(souce).contains('Добавить').click();
@@ -86,17 +95,17 @@ describe('Тест заказа', function () {
       .should('exist')
       .click();
     cy.get(orderNumber).contains('1').should('exist');
+    cy.get(constructor).should('not.contain', 'Флюоресцентная булка R2-D3');
+    cy.get(constructor).should('not.contain', 'Флюоресцентная булка R2-D3');
+    cy.get(ingredientConstructor).should(
+      'not.contain',
+      'Соус Spicy-X'
+    );
+    cy.get(ingredientConstructor).should(
+      'not.contain',
+      'Соус Spicy-X'
+    );
     cy.get(closeIcon).click();
     cy.get(modal).should('not.exist');
-    cy.get(constructor).should('not.contain', 'Флюоресцентная булка R2-D3');
-    cy.get(constructor).should('not.contain', 'Флюоресцентная булка R2-D3');
-    cy.get(ingredientConstructor).should(
-      'not.contain',
-      'Соус Spicy-X'
-    );
-    cy.get(ingredientConstructor).should(
-      'not.contain',
-      'Соус Spicy-X'
-    );
   });
 });

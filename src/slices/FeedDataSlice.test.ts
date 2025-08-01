@@ -5,7 +5,6 @@ import {
   getOrderByNumber
 } from './FeedDataSlice';
 
-
 const initialState: TFeedState = {
   orders: [],
   orderModal: null,
@@ -27,8 +26,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Краторный люминесцентный бургер',
-      createdAt: "2025-01-01T00:00:00.000Z",
-      updatedAt: "2025-01-01T00:00:00.000Z",
+      createdAt: '2025-01-01T00:00:00.000Z',
+      updatedAt: '2025-01-01T00:00:00.000Z',
       number: 1
     },
     {
@@ -43,7 +42,7 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Антарианский краторный бессмертный минеральный экзо-плантаго био-марсианский бургер',
-      createdAt: "2025-01-01T00:00:00.000Z",
+      createdAt: '2025-01-01T00:00:00.000Z',
       updatedAt: '2025-01-01T00:00:00.000Z',
       number: 2
     },
@@ -56,8 +55,8 @@ const ordersTest = {
       ],
       status: 'done',
       name: 'Краторный space бургер',
-      createdAt: "2025-01-01T00:00:00.000Z",
-      updatedAt: "2025-01-01T00:00:00.000Z",
+      createdAt: '2025-01-01T00:00:00.000Z',
+      updatedAt: '2025-01-01T00:00:00.000Z',
       number: 3
     }
   ],
@@ -100,7 +99,7 @@ describe('Тесты FeedDataSlice', () => {
       loading: true,
       total: 0,
       totalToday: 0,
-      error: 'Ошибка теста',
+      error: 'Ошибка теста'
     });
   });
 
@@ -122,7 +121,6 @@ describe('Тесты FeedDataSlice', () => {
       error: null
     });
   });
-
 
   it('Тест заказов orderModal и завершение загрузки', () => {
     const actualState = feedDataSlice.reducer(

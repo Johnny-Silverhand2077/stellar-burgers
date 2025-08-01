@@ -1,5 +1,5 @@
 import { forwardRef, useMemo } from 'react';
-import { useSelector} from '../../services/store';
+import { useSelector } from '../../services/store';
 import { TIngredientsCategoryProps } from './type';
 import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
@@ -8,9 +8,8 @@ import { getConstructorItems } from '../../slices/BurgerConstructoSlice';
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
   TIngredientsCategoryProps
->(({ title, titleRef, ingredients, ...rest}, ref) => {
-
-  const burgerConstructor = useSelector(getConstructorItems)
+>(({ title, titleRef, ingredients, ...rest }, ref) => {
+  const burgerConstructor = useSelector(getConstructorItems);
 
   const ingredientsCounters = useMemo(() => {
     const { bun, ingredients } = burgerConstructor;

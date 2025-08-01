@@ -6,10 +6,8 @@ import { Preloader } from '../../components/ui';
 import { FC } from 'react';
 import { getStatusLoading } from '../../slices/IngredientsSlice';
 
-
 export const ConstructorPage: FC = () => {
-  
-  const statusLoading = useSelector(getStatusLoading)
+  const statusLoading = useSelector(getStatusLoading);
   const isIngredientsLoading = statusLoading;
 
   return (

@@ -3,14 +3,17 @@ import { useDispatch, useSelector } from '../../services/store';
 import { RegisterUI } from '@ui-pages';
 import { Preloader } from '@ui';
 import { TRegisterData } from '@api';
-import { registerUser, selectLoginUserRequst} from '../../slices/UserInfoSlice';
+import {
+  registerUser,
+  selectLoginUserRequst
+} from '../../slices/UserInfoSlice';
 
 export const Register: FC = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const loading = useSelector(selectLoginUserRequst)
-  const dispatch = useDispatch()
+  const loading = useSelector(selectLoginUserRequst);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -19,11 +22,11 @@ export const Register: FC = () => {
       name: userName,
       password: password
     };
-    dispatch(registerUser(newUser))
+    dispatch(registerUser(newUser));
   };
 
-  if(loading) { 
-    return <Preloader />
+  if (loading) {
+    return <Preloader />;
   }
 
   return (
