@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
 import { getStatusLoading } from './IngredientsSlice';
-import { orderBurgerApi, getIngredientsApi } from '@api';
+import { orderBurgerApi, getIngredientsApi } from '../utils/burger-api';
 
 type TBurgerContructurState = {
   constructorItems: {
@@ -59,76 +59,78 @@ export const burgerCostructorSlice = createSlice({
         return { payload: { ...ingredient, id: key } };
       }
     },
-    removeIngredient: (state, action: PayloadAction<TConstructorIngredient>) => {
+    removeIngredient: (
+      state,
+      action: PayloadAction<TConstructorIngredient>
+    ) => {
       state.constructorItems.ingredients =
         state.constructorItems.ingredients.filter(
           (item) => item.id !== action.payload.id
         );
     },
-    moveUpIngredient: (state, action: PayloadAction<number> ) => {
-        const index = action.payload;
-        if(index > 0) {
-            const ingredients = state.constructorItems.ingredients;
-            [ingredients[index - 1], ingredients[index]] = [
-                ingredients[index],
-                ingredients[index - 1]
-            ]
-        }
+    moveUpIngredient: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index > 0) {
+        const ingredients = state.constructorItems.ingredients;
+        [ingredients[index - 1], ingredients[index]] = [
+          ingredients[index],
+          ingredients[index - 1]
+        ];
+      }
     },
-    moveDownIngredient: (state, action: PayloadAction<number> ) => {
-        const index = action.payload;
-        if(index < state.constructorItems.ingredients.length - 1) {
-            const ingredients = state.constructorItems.ingredients;
-            [ingredients[index + 1], ingredients[index]] = [
-                ingredients[index],
-                ingredients[index + 1]
-            ]
-        }
+    moveDownIngredient: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      if (index < state.constructorItems.ingredients.length - 1) {
+        const ingredients = state.constructorItems.ingredients;
+        [ingredients[index + 1], ingredients[index]] = [
+          ingredients[index],
+          ingredients[index + 1]
+        ];
+      }
     },
     clearOrder: (state) => initialState
   },
   extraReducers: (builder) => {
     builder
-    .addCase(createOrder.pending, (state) => {
+      .addCase(createOrder.pending, (state) => {
         state.orderRequst = false;
-        state.error = null
-    })
-     .addCase(createOrder.rejected, (state, action) => {
+        state.error = null;
+      })
+      .addCase(createOrder.rejected, (state, action) => {
         state.orderRequst = false;
-        state.error = action.error.message
-    })
-     .addCase(createOrder.fulfilled, (state, action) => {
-        state.constructorItems.bun = null
-        state.constructorItems.ingredients = []
+        state.error = action.error.message;
+      })
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.constructorItems.bun = null;
+        state.constructorItems.ingredients = [];
         state.orderRequst = false;
-        state.orderModalData = action.payload.order
-        state.error = null
-    })
+        state.orderModalData = action.payload.order;
+        state.error = null;
+      });
   },
   selectors: {
     getConstructorItems: (state) => state.constructorItems,
     getLoading: (state) => state.loading,
     getError: (state) => state.error,
     getOrderRequst: (state) => state.orderRequst,
-    getOrderModalData: (state) => state.orderModalData,
+    getOrderModalData: (state) => state.orderModalData
   }
 });
 
 export const {
-    addIngredient,
-    removeIngredient,
-    moveUpIngredient,
-    moveDownIngredient,
-    clearOrder
-} = burgerCostructorSlice.actions
+  addIngredient,
+  removeIngredient,
+  moveUpIngredient,
+  moveDownIngredient,
+  clearOrder
+} = burgerCostructorSlice.actions;
 
 export const {
-    getConstructorItems,
-    getLoading,
-    getError,
-    getOrderRequst,
-    getOrderModalData
-} = burgerCostructorSlice.selectors
+  getConstructorItems,
+  getLoading,
+  getError,
+  getOrderRequst,
+  getOrderModalData
+} = burgerCostructorSlice.selectors;
 
 export default burgerCostructorSlice;
-

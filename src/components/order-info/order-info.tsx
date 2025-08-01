@@ -1,4 +1,4 @@
-import { FC, useMemo, useEffect} from 'react';
+import { FC, useMemo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
@@ -9,17 +9,17 @@ import { getIngredientsWirhSelector } from '../../slices/IngredientsSlice';
 import { selectOrderId } from '../../services/selector';
 
 export const OrderInfo: FC = () => {
-  const {number} = useParams();
+  const { number } = useParams();
   const orders = useSelector(getFeedOrders);
   const ingredients: TIngredient[] = useSelector(getIngredientsWirhSelector);
-  const orderData = useSelector(selectOrderId(Number(number)))
-  const dispatch = useDispatch()
+  const orderData = useSelector(selectOrderId(Number(number)));
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if(!orderData) {
-      dispatch(getOrderByNumber(Number(number)))
+    if (!orderData) {
+      dispatch(getOrderByNumber(Number(number)));
     }
-  }, [dispatch])
+  }, [dispatch]);
 
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return;

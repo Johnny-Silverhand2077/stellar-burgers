@@ -24,8 +24,7 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const locationState = location.state as { background?: Location };
-  const background =
-    locationState && location.state?.background;
+  const background = locationState && location.state?.background;
 
   const closeModal = () => {
     navigate(-1);
